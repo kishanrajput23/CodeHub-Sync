@@ -1,0 +1,74 @@
+{
+  "manifest_version": 3,
+  "name": "CodeHub Sync",
+  "version": "1.0.0",
+  "description": "Auto-syncs accepted submissions from LeetCode, GfG and HackerRank to your GitHub repo.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "https://leetcode.com/*",
+    "https://www.geeksforgeeks.org/*",
+    "https://www.hackerrank.com/*",
+    "https://api.github.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "CodeHub Sync"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://leetcode.com/*"],
+      "js": ["content/inject-bridge.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://leetcode.com/*"],
+      "js": ["content/leetcode.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.geeksforgeeks.org/*"],
+      "js": ["content/gfg-bridge.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.geeksforgeeks.org/*"],
+      "js": ["content/gfg.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://www.hackerrank.com/*"],
+      "js": ["content/hr-bridge.js"],
+      "world": "MAIN",
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://www.hackerrank.com/*"],
+      "js": ["content/hackerrank.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["content/inject-bridge.js"],
+      "matches": ["https://leetcode.com/*"]
+    },
+    {
+      "resources": ["content/gfg-bridge.js"],
+      "matches": ["https://www.geeksforgeeks.org/*"]
+    },
+    {
+      "resources": ["content/hr-bridge.js"],
+      "matches": ["https://www.hackerrank.com/*"]
+    }
+  ]
+}

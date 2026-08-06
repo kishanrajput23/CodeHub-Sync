@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>CodeHub Sync</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="icons/icon48.png" alt="logo" />
+    <div>
+      <h1>CodeHub <span>Sync</span></h1>
+      <p id="tab-status"></p>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><span id="stat-leetcode">0</span><label>LeetCode</label></div>
+    <div class="stat"><span id="stat-gfg">0</span><label>GfG</label></div>
+    <div class="stat"><span id="stat-hr">0</span><label>HackerRank</label></div>
+  </section>
+
+  <form id="settings-form">
+    <label>GitHub Token <span class="hint-inline">(shared across all platforms)</span>
+      <input type="password" id="githubToken" placeholder="ghp_xxx..." autocomplete="off" />
+    </label>
+
+    <div class="platform-tabs">
+      <button type="button" class="tab active" data-platform="lc" data-name="LeetCode">LeetCode</button>
+      <button type="button" class="tab" data-platform="gfg" data-name="GfG">GfG</button>
+      <button type="button" class="tab" data-platform="hr" data-name="HackerRank">HR</button>
+    </div>
+    <p class="platform-label" id="platform-label">LeetCode Repository</p>
+
+    <label>Owner
+      <input type="text" id="platform-owner" placeholder="your-github-username" />
+    </label>
+    <label>Repository
+      <input type="text" id="platform-repo" placeholder="e.g. leetcode-solutions" />
+    </label>
+    <label>Branch
+      <input type="text" id="platform-branch" placeholder="main" />
+    </label>
+
+    <div class="btn-row">
+      <button type="submit">Save Settings</button>
+      <button type="button" id="test-btn">Test Connection</button>
+    </div>
+    <p id="save-status"></p>
+  </form>
+
+  <footer class="footer">
+    Token needs the <code>repo</code> scope — stored only in your browser,
+    never sent to any server.
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
