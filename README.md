@@ -15,6 +15,8 @@
   <img src="https://visitor-badge.laobi.icu/badge?page_id=kishanrajput23.CodeHub-Sync" alt="Visitors" />
 </p>
 
+<img width="1536" height="1024" alt="CodeHub Sync" src="https://github.com/user-attachments/assets/616eba91-42f0-433c-9555-eb6181558d33" />
+
 ---
 
 ## Why CodeHub Sync?
@@ -50,7 +52,7 @@ Nothing is ever deleted. Identical re-submissions are silently skipped.
 
 ## How It Works
 
-The extension runs two content scripts per platform — one in the **page's own JavaScript context** (to intercept network calls before they leave the browser) and one in the **isolated extension context** (to talk to GitHub). No DOM scraping. No polling for verdict banners.
+The extension runs two content scripts per platform, one in the **page's own JavaScript context** (to intercept network calls before they leave the browser) and one in the **isolated extension context** (to talk to GitHub). No DOM scraping. No polling for verdict banners.
 
 ### LeetCode
 Intercepts the `/graphql` and submission fetch calls directly. Captures the exact code you submitted along with runtime percentile, memory percentile, difficulty, and topic tags. Pushes under `Solutions/{padded-id}-{slug}/`.
@@ -122,15 +124,16 @@ Create one repo per platform you want to track (or reuse existing ones), e.g. `l
 4. Copy the token — you only need one token for all three platforms
 
 ### 3. Load the extension
-1. Open `chrome://extensions`
-2. Enable **Developer mode** (top-right toggle)
-3. Click **Load unpacked** → select the `codehub-sync` folder
-4. The CodeHub Sync icon appears in your toolbar
+1. On this GitHub repo page click the green **Code** button → **Download ZIP** and extract it or run `git clone https://github.com/your-username/CodeHub-Sync.git`
+2. Open `chrome://extensions`
+3. Enable **Developer mode** (top-right toggle)
+4. Click **Load unpacked** → select the extracted `codehub-sync` folder
+5. The CodeHub Sync icon appears in your toolbar
 
 ### 4. Configure each platform
 Click the extension icon and fill in the popup:
 
-- **GitHub Token** — shared across all platforms (paste once)
+- **GitHub Token** shared across all platforms (paste once)
 - **LeetCode tab** → Owner / Repository / Branch
 - **GfG tab** → Owner / Repository / Branch
 - **HR tab** → Owner / Repository / Branch
@@ -223,6 +226,7 @@ Any language accepted by the platform is handled. File extension is derived from
 | Symptom | Fix |
 |---|---|
 | Nothing pushed after Accepted | Open DevTools on the problem page → Console tab → look for `[CodeHub Sync]` errors |
+| Solution pushed on old tab but nothing happens | Hard refresh the tab (`Ctrl+Shift+R`) after reloading the extension — old content scripts don't auto-update |
 | `Missing GitHub settings` error | Open popup → check the correct platform tab has Owner/Repo/Branch filled in |
 | `UPSERT_FILE_FAILED_422` | SHA mismatch — delete the conflicting file on GitHub and resubmit |
 | Stats counter not incrementing | Open `chrome://extensions` → find CodeHub Sync → click **service worker** → check background console |
