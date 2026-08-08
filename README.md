@@ -54,6 +54,8 @@ Nothing is ever deleted. Identical re-submissions are silently skipped.
 
 The extension runs two content scripts per platform, one in the **page's own JavaScript context** (to intercept network calls before they leave the browser) and one in the **isolated extension context** (to talk to GitHub). No DOM scraping. No polling for verdict banners.
 
+<video>https://drive.google.com/file/d/1llN7NchTzRf-XPlQu1pwOXSDMHs6jGwH/view?usp=sharing</video>
+
 ### LeetCode
 Intercepts the `/graphql` and submission fetch calls directly. Captures the exact code you submitted along with runtime percentile, memory percentile, difficulty, and topic tags. Pushes under `Solutions/{padded-id}-{slug}/`.
 
@@ -62,6 +64,24 @@ Intercepts XHR and fetch calls to GFG's `practiceapi` endpoints. Detects accepta
 
 ### HackerRank
 Intercepts the XHR submission POST to HackerRank's REST API, extracts the submission ID, then polls the result endpoint until a terminal status arrives. Fetches challenge metadata (track, subdomain, difficulty, full problem HTML) in the same pass.
+
+---
+
+## 🎥 Demo
+#### Click on images to watch the demo!
+<p align="center">
+  <a href="https://drive.google.com/file/d/1hvw4adv3P3r8WYV48tpOHaphd41GbXeu/view?usp=sharing">
+    <img src="https://github.com/user-attachments/assets/7fb94a15-d0c3-4908-9c9c-43a255f7fed1" width="250" alt="GeeksforGeeks Demo">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://drive.google.com/file/d/1llN7NchTzRf-XPlQu1pwOXSDMHs6jGwH/view?usp=sharing">
+    <img src="https://github.com/user-attachments/assets/49544266-2fc3-4299-abd1-63e3eea9624e" width="250" alt="LeetCode Demo">
+  </a>
+  &nbsp;&nbsp;
+  <a href="https://drive.google.com/file/d/1BmMkb0nA4b2zTuxOagx8Vm5jD6wYWKlV/view?usp=sharing">
+    <img src="https://github.com/user-attachments/assets/7e4cb1dc-6e22-451d-890b-e28663cdd91d" width="250" alt="HackerRank Demo">
+  </a>
+</p>
 
 ---
 
