@@ -29,8 +29,9 @@ window.addEventListener("message", (e) => {
       },
       (result) => {
         if (chrome.runtime.lastError) return; // stale context after extension reload
-        if (result?.ok && !result.skipped) console.log("[CodeHub Sync] GfG pushed:", result.filePath);
-        else if (result && !result.ok) console.warn("[CodeHub Sync] GfG push failed:", result.error);
+        if (result?.ok && !result.skipped) showToast(`✅ Synced to GitHub: ${result.filePath}`);
+        else if (result?.skipped)          showToast(`ℹ️ ${result.reason}`);
+        else if (result && !result.ok)     showToast(`⚠️ CodeHub Sync: ${result.error}`, true);
       }
     );
   } catch (_) {
@@ -41,3 +42,16 @@ window.addEventListener("message", (e) => {
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type === "PING") sendResponse({ active: true });
 });
+
+function showToast(text, isError = false) {
+  const el = document.createElement("div");
+  el.textContent = text;
+  el.style.cssText = `
+    position: fixed; bottom: 20px; right: 20px; z-index: 999999;
+    background: ${isError ? "#c0392b" : "#1a7f37"}; color: #fff;
+    padding: 10px 16px; border-radius: 8px; font: 13px system-ui, sans-serif;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.25); max-width: 320px;
+  `;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 4500);
+}
