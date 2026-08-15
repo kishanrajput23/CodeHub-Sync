@@ -111,6 +111,7 @@
     // Look for the Expected Time/Space Complexity section on the page
     const candidates = [
       "[class*='expected-complexity']", "[class*='expectedComplexity']",
+      "[class*='expected_complexity']",
       "[class*='complexity']", "[class*='Complexity']",
     ];
     for (const sel of candidates) {
@@ -118,9 +119,12 @@
       const text = el?.innerText?.trim() || "";
       if (text.length > 5) return text;
     }
-    // Fallback: scan paragraphs for the keyword
-    const all = [...document.querySelectorAll("p, div")];
-    const found = all.find(el => /expected time complexity/i.test(el.textContent) && el.textContent.length < 300);
+    // Fallback: scan for any element mentioning time/space complexity (with or without "Expected" prefix).
+    const all = [...document.querySelectorAll("p, div, section")];
+    const found = all.find(el =>
+      /\b(expected\s+)?(time|auxiliary|space)\s+complexity/i.test(el.textContent) &&
+      el.textContent.length < 500
+    );
     return found ? found.innerText.trim() : "";
   }
 
@@ -130,6 +134,7 @@
     const diff = getDifficulty();
     const topics = getTopics();
     console.log("[CodeHub GFG] dispatch — difficulty:", diff, "| topics:", topics);
+    window.postMessage({ __codehub: "GFG_SUBMISSION_PENDING" }, "*");
     window.postMessage(
       {
         __codehub: "GFG_SUBMISSION",

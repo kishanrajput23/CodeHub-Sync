@@ -44,9 +44,15 @@ function cleanLeetCodeHtml(html) {
   if (!html) return "";
   return html
     .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "")
+    // Convert MathJax source to GitHub-flavoured math before generic script strip.
+    .replace(/<script\s[^>]*type="math\/tex(?:;[^"]*)?"\s*[^>]*>([\s\S]*?)<\/script>/gi, (_, tex) => ` $${tex.trim()}$ `)
     .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, "")
-    .replace(/<svg[^>]*>[\s\S]*?<\/svg>/gi, "")
-    .replace(/<span[^>]*MathJax[^>]*>\s*<\/span>/gi, "")  // empty wrappers after SVG removal
+    // Use SVG <title> as math fallback (MathJax v3 adds these); drop untitled SVGs.
+    .replace(/<svg\b[^>]*>([\s\S]*?)<\/svg>/gi, (_, inner) => {
+      const t = inner.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+      return t ? ` $${t[1].trim()}$ ` : "";
+    })
+    .replace(/<span[^>]*MathJax[^>]*>[\s\S]*?<\/span>/gi, "")  // remove leftover MathJax wrappers
     .replace(/<p[^>]*>\s*&nbsp;\s*<\/p>/gi, "")
     .replace(/\s*style="[^"]*"/gi, "")
     .replace(/\s*class="[^"]*"/gi, "")
@@ -71,9 +77,15 @@ function buildGFGProblemReadme({ slug, title, difficulty, topicTags, problemStat
   let md = `## [${title || slug}](${url})\n\n`;
   if (difficulty) md += `**Difficulty:** ${difficulty}  \n`;
   if (topicTags?.length) md += `**Topics:** ${topicTags.join(", ")}  \n`;
-  if (expectedComplexity) md += `\n**Expected Complexities:**\n\n${expectedComplexity}\n`;
   md += "\n";
   if (problemStatement) md += `**Problem Description:**\n\n${problemStatement}\n`;
+  if (expectedComplexity) {
+    // Two trailing spaces before \n = Markdown hard line break; keeps entries on separate lines.
+    const formatted = expectedComplexity
+      .replace(/\s*((?:Expected\s+)?(?:Time\s+Complexity|Auxiliary\s+Space|Space\s+Complexity)\s*:)/gi, "  \n$1")
+      .trim();
+    md += `\n**Expected Complexities:**\n\n${formatted}\n`;
+  }
   return md;
 }
 

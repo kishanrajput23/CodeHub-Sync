@@ -7,8 +7,15 @@ const GFG_LANG_MAP = {
 };
 
 window.addEventListener("message", (e) => {
-  if (e.source !== window || e.data?.__codehub !== "GFG_SUBMISSION") return;
+  if (e.source !== window) return;
   const d = e.data;
+
+  if (d?.__codehub === "GFG_SUBMISSION_PENDING") {
+    showToast("⏳ Submission detected, waiting for results…");
+    return;
+  }
+
+  if (d?.__codehub !== "GFG_SUBMISSION") return;
   try {
     chrome.runtime.sendMessage(
       {

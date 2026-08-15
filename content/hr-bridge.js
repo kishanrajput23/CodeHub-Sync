@@ -136,7 +136,7 @@
       trackName:     meta?.track?.track_name || "",
       subdomainSlug: meta?.track?.slug       || "",
       subdomainName: meta?.track?.name       || "",
-      bodyHtml:      meta?.body_html         || meta?.preview || "",
+      bodyHtml:      meta?.body_html || meta?.body || meta?.preview || "",
       problemUrl:    `https://www.hackerrank.com/challenges/${challengeSlug}/problem`,
     }, "*");
   }
