@@ -15,7 +15,7 @@
   <img src="https://visitor-badge.laobi.icu/badge?page_id=kishanrajput23.CodeHub-Sync" alt="Visitors" />
 </p>
 
-<img width="1536" height="1024" alt="CodeHub Sync" src="https://github.com/user-attachments/assets/616eba91-42f0-433c-9555-eb6181558d33" />
+<img width="1536" height="1024" alt="CodeHub Sync" src="https://github.com/kishanrajput23/CodeHub-Sync/blob/main/Assets/CodeHub%20Sync.png" />
 
 ---
 
