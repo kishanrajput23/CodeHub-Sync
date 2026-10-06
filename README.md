@@ -165,46 +165,6 @@ Accept a solution on any supported platform. The extension intercepts the networ
 
 ---
 
-## Per-Problem README
-
-Every new problem folder gets a `README.md` generated automatically on first push:
-
-**LeetCode example:**
-```markdown
-## [1. Two Sum](https://leetcode.com/problems/two-sum/)
-
-**Difficulty:** Easy
-**Topics:** Array, Hash Table
-
-**Problem Description:**
-<full cleaned HTML from LeetCode's GraphQL API>
-```
-
-**GeeksforGeeks example:**
-```markdown
-## [Sliding Window Maximum](https://www.geeksforgeeks.org/problems/sliding-window-maximum/1)
-
-**Difficulty:** Hard
-**Topics:** sliding-window, Deque
-
-**Problem Description:**
-...
-```
-
-**HackerRank example:**
-```markdown
-## [Solve Me First](https://www.hackerrank.com/challenges/solve-me-first/problem)
-
-**Domain:** Algorithms
-**Subdomain:** Warmup
-**Difficulty:** Easy
-
-**Problem Description:**
-...
-```
-
----
-
 ## LeetCode Topic Index
 
 After each LeetCode push, the repo's root `README.md` is updated between managed markers:
